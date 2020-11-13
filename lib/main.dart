@@ -93,7 +93,7 @@ class MainView extends StatelessWidget {
   }
 }
 
-Widget _list() {
+/*Widget _list() {
   return ListView(
     children: [
       _item('Do homework'),
@@ -109,7 +109,7 @@ Widget _item(text) {
       style: TextStyle(fontSize: 20),
     ),
   );
-}
+}*/
 
 class Constants {
   static const String All = 'all';
