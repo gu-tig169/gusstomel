@@ -140,7 +140,7 @@ class SecondView extends StatelessWidget {
         child: Column(
           children: [
             _inputField(),
-            _bottonRow(),
+            _buttonRow(),
           ],
         ),
       ),
@@ -163,7 +163,7 @@ class SecondView extends StatelessWidget {
         ));
   }
 
-  Widget _bottonRow() {
+  Widget _buttonRow() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
