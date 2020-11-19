@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import './model.dart';
 
+//Lägga till todo-vyn
 class AddTodoView extends StatefulWidget {
   final TodoItem todo;
 
@@ -20,7 +21,9 @@ class AddTodoViewState extends State<AddTodoView> {
   AddTodoViewState(TodoItem todo) {
     this.message = todo.message;
 
-    textEditingController = TextEditingController(text: todo.message);
+    textEditingController = TextEditingController(
+      text: todo.message,
+    );
     textEditingController.addListener(() {
       setState(() {
         message = textEditingController.text;

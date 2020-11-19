@@ -17,11 +17,6 @@ class TodoList extends StatelessWidget {
 
   Widget _todoItem(context, todo) {
     return ListTile(
-      leading: Container(
-        height: 30,
-        width: 30,
-        decoration: BoxDecoration(color: todo.color),
-      ),
       title: Text(todo.message),
       trailing: IconButton(
         icon: Icon(Icons.close),

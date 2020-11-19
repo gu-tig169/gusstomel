@@ -5,6 +5,7 @@ import 'AddTodoView.dart';
 import 'TodoList.dart';
 import 'model.dart';
 
+//Huvudvyn
 class TodoListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
