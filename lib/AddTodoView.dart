@@ -21,9 +21,7 @@ class AddTodoViewState extends State<AddTodoView> {
   AddTodoViewState(TodoItem todo) {
     this.message = todo.message;
 
-    textEditingController = TextEditingController(
-      text: todo.message,
-    );
+    textEditingController = TextEditingController();
     textEditingController.addListener(() {
       setState(() {
         message = textEditingController.text;

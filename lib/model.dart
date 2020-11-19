@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 
 class TodoItem {
   String message;
+  bool check;
 
-  TodoItem({this.message});
+  TodoItem({this.message, this.check = false});
 }
 
 class MyState extends ChangeNotifier {
@@ -17,6 +18,11 @@ class MyState extends ChangeNotifier {
 
   void removeTodo(TodoItem todo) {
     _list.remove(todo);
+    notifyListeners();
+  }
+
+  void setTake(TodoItem todo, bool check) {
+    todo.check = check;
     notifyListeners();
   }
 }

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
-import 'package:uppgift1/TodoListView.dart';
 
 import 'model.dart';
 
@@ -17,8 +16,18 @@ class TodoList extends StatelessWidget {
 
   Widget _todoItem(context, todo) {
     return ListTile(
+      leading: Checkbox(
+          checkColor: Colors.black,
+          activeColor: Colors.blueGrey,
+          focusColor: Colors.black,
+          value: todo.check,
+          onChanged: (bool newValue) {
+            var state = Provider.of<MyState>(context, listen: false);
+            state.setTake(todo, newValue);
+          }),
       title: Text(todo.message),
       trailing: IconButton(
+        color: Colors.black,
         icon: Icon(Icons.close),
         onPressed: () {
           var state = Provider.of<MyState>(context, listen: false);
