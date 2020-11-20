@@ -55,25 +55,27 @@ class TodoListView extends StatelessWidget {
     );
   }
 
-  void choiceAction(String choice) {
-    if (choice == Constants.All) {
+  void choiceAction(
+    String choice,
+  ) {
+    if (choice == Constants.all) {
       print('all');
-    } else if (choice == Constants.Done) {
+    } else if (choice == Constants.done) {
       print('done');
-    } else if (choice == Constants.Undone) {
+    } else if (choice == Constants.undone) {
       print('undone');
     }
   }
 }
 
 class Constants {
-  static const String All = 'all';
-  static const String Done = 'done';
-  static const String Undone = 'undone';
+  static const String all = 'all';
+  static const String done = 'done';
+  static const String undone = 'undone';
 
   static const List<String> choices = <String>[
-    All,
-    Done,
-    Undone,
+    all,
+    done,
+    undone,
   ];
 }

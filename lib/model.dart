@@ -25,4 +25,15 @@ class MyState extends ChangeNotifier {
     todo.check = check;
     notifyListeners();
   }
+
+//Här försöker jag skapa filtreringen för popupMenuButton, men den fungerar inte...
+  List<TodoItem> filteredList(String choice) {
+    if (choice == "done") {
+      return _list.where((todo) => todo.check == true).toList();
+    } else if (choice == "undone") {
+      return _list.where((todo) => todo.check == false).toList();
+    }
+
+    return _list;
+  }
 }
