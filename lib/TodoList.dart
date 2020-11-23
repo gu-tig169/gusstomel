@@ -23,7 +23,7 @@ class TodoList extends StatelessWidget {
           value: todo.check,
           onChanged: (bool newValue) {
             var state = Provider.of<MyState>(context, listen: false);
-            state.setTake(todo, newValue);
+            state.setCheck(todo, newValue);
           }),
       title: Text(todo.message),
       trailing: IconButton(

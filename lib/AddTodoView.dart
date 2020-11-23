@@ -51,6 +51,7 @@ class AddTodoViewState extends State<AddTodoView> {
     );
   }
 
+//Textinmatningsfält
   Widget _inputField() {
     return Container(
         margin: EdgeInsets.only(left: 20, right: 20, top: 20),

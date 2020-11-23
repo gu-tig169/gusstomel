@@ -9,7 +9,11 @@ class TodoItem {
 
 class MyState extends ChangeNotifier {
   List<TodoItem> _list = [];
+  String _filterBy = 'all';
+
   List<TodoItem> get list => _list;
+
+  String get filterBy => _filterBy;
 
   void addTodo(TodoItem todo) {
     _list.add(todo);
@@ -21,19 +25,13 @@ class MyState extends ChangeNotifier {
     notifyListeners();
   }
 
-  void setTake(TodoItem todo, bool check) {
+  void setCheck(TodoItem todo, bool check) {
     todo.check = check;
     notifyListeners();
   }
 
-//Här försöker jag skapa filtreringen för popupMenuButton, men det fungerar inte...
-  List<TodoItem> filteredList(String choice) {
-    if (choice == "done") {
-      return _list.where((todo) => todo.check == true).toList();
-    } else if (choice == "undone") {
-      return _list.where((todo) => todo.check == false).toList();
-    }
-
-    return _list;
+  void setFilterBy(String filterBy) {
+    this._filterBy = filterBy;
+    notifyListeners();
   }
 }

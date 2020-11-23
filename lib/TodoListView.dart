@@ -19,21 +19,20 @@ class TodoListView extends StatelessWidget {
         ),
         centerTitle: true,
         actions: [
-          PopupMenuButton<String>(
-            onSelected: choiceAction,
-            itemBuilder: (BuildContext context) {
-              return Constants.choices.map((String choice) {
-                return PopupMenuItem<String>(
-                  value: choice,
-                  child: Text(choice),
-                );
-              }).toList();
-            },
-          )
+          PopupMenuButton(
+              onSelected: (value) {
+                Provider.of<MyState>(context, listen: false).setFilterBy(value);
+              },
+              itemBuilder: (context) => [
+                    PopupMenuItem(child: Text('all'), value: 'all'),
+                    PopupMenuItem(child: Text('done'), value: 'done'),
+                    PopupMenuItem(child: Text('undone'), value: 'undone'),
+                  ]),
         ],
       ),
       body: Consumer<MyState>(
-        builder: (context, state, child) => TodoList(state.list),
+        builder: (context, state, child) =>
+            TodoList(_filterList(state.list, state.filterBy)),
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(
@@ -55,27 +54,13 @@ class TodoListView extends StatelessWidget {
     );
   }
 
-  void choiceAction(
-    String choice,
-  ) {
-    if (choice == Constants.all) {
-      print('all');
-    } else if (choice == Constants.done) {
-      print('done');
-    } else if (choice == Constants.undone) {
-      print('undone');
+  List<TodoItem> _filterList(list, choice) {
+    if (choice == "done") {
+      return list.where((todo) => todo.check == true).toList();
+    } else if (choice == "undone") {
+      return list.where((todo) => todo.check == false).toList();
     }
+
+    return list;
   }
-}
-
-class Constants {
-  static const String all = 'all';
-  static const String done = 'done';
-  static const String undone = 'undone';
-
-  static const List<String> choices = <String>[
-    all,
-    done,
-    undone,
-  ];
 }
