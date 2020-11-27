@@ -16,7 +16,7 @@ class Api {
 
   static Future<List<TodoItem>> getTodos() async {
     var response = await http.get('$API_URL/todos?key=$API_KEY');
-    //print(response.body);
+
     var json = jsonDecode(response.body);
 
     return json.map<TodoItem>((data) {
