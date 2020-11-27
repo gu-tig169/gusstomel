@@ -20,6 +20,7 @@ class TodoItem {
     return TodoItem(
       message: json['title'],
       check: stringToCheck(json['check']),
+      id: json['id'],
     );
   }
 }
@@ -61,9 +62,9 @@ class MyState extends ChangeNotifier {
     await getList();
   }
 
-  void removeTodo(TodoItem todo) {
-    _list.remove(todo);
-    notifyListeners();
+  void removeTodo(TodoItem todo) async {
+    await Api.deleteTodo(todo.id);
+    await getList();
   }
 
   void setCheck(TodoItem todo, bool check) {

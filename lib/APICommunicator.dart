@@ -22,4 +22,8 @@ class Api {
       return TodoItem.fromJson(data);
     }).toList();
   }
+
+  static Future deleteTodo(String todoId) async {
+    await http.delete('$API_URL/todos/$todoId?key=$API_KEY');
+  }
 }
