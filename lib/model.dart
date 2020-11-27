@@ -12,29 +12,17 @@ class TodoItem {
   static Map<String, dynamic> toJson(TodoItem todo) {
     return {
       'title': todo.message,
-      'done': checkToString(todo.check),
+      'done': todo.check,
     };
   }
 
   static TodoItem fromJson(Map<String, dynamic> json) {
     return TodoItem(
       message: json['title'],
-      check: stringToCheck(json['check']),
+      check: json['done'],
       id: json['id'],
     );
   }
-}
-
-String checkToString(bool check) {
-  if (check == false) return 'false';
-  if (check == true) return 'true';
-  return 'false';
-}
-
-bool stringToCheck(String check) {
-  if (check == 'false') return false;
-  if (check == 'true') return true;
-  return false;
 }
 
 class MyState extends ChangeNotifier {
@@ -44,12 +32,6 @@ class MyState extends ChangeNotifier {
   List<TodoItem> get list => _list;
 
   String get filterBy => _filterBy;
-
-  String _id = '';
-
-  String get id => _id;
-
-  MyState() {}
 
   Future getList() async {
     List<TodoItem> list = await Api.getTodos();
@@ -63,13 +45,15 @@ class MyState extends ChangeNotifier {
   }
 
   void removeTodo(TodoItem todo) async {
-    await Api.deleteTodo(todo.id);
+    await Api.deleteTodo(todo);
     await getList();
   }
 
-  void setCheck(TodoItem todo, bool check) {
+  void setCheck(TodoItem todo, bool check) async {
     todo.check = check;
-    notifyListeners();
+    print(check);
+    await Api.changeCheck(todo);
+    await getList();
   }
 
   void setFilterBy(String filterBy) {

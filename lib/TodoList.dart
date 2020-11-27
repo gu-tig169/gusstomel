@@ -25,7 +25,7 @@ class TodoList extends StatelessWidget {
             var state = Provider.of<MyState>(context, listen: false);
             state.setCheck(todo, newValue);
           }),
-      title: Text(todo.message),
+      title: Text(todo.message != null ? todo.message : ''),
       trailing: IconButton(
         color: Colors.black,
         icon: Icon(Icons.close),
