@@ -69,6 +69,7 @@ class AddTodoViewState extends State<AddTodoView> {
         ));
   }
 
+//Add-knapp
   Widget _buttonRow() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
