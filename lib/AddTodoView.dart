@@ -15,7 +15,7 @@ class AddTodoView extends StatefulWidget {
 
 class AddTodoViewState extends State<AddTodoView> {
   String message;
-
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
   TextEditingController textEditingController;
 
   AddTodoViewState(TodoItem todo) {
@@ -30,6 +30,7 @@ class AddTodoViewState extends State<AddTodoView> {
   }
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       appBar: AppBar(
         iconTheme: IconThemeData(color: Colors.black),
         backgroundColor: Colors.blueGrey,
@@ -76,13 +77,18 @@ class AddTodoViewState extends State<AddTodoView> {
       children: [
         Container(height: 100),
         FlatButton(
-          child: Text('+ ADD'),
-          color: Colors.blueGrey,
-          textColor: Colors.black,
-          onPressed: () {
-            Navigator.pop(context, TodoItem(message: message));
-          },
-        ),
+            child: Text('+ ADD'),
+            color: Colors.blueGrey,
+            textColor: Colors.black,
+            onPressed: () {
+              if (textEditingController.text.trim().isEmpty) {
+                SnackBar snackBar = SnackBar(content: Text("Write a todo!"));
+                _scaffoldKey.currentState.showSnackBar(snackBar);
+                print('pressed');
+              } else {
+                Navigator.pop(context, TodoItem(message: message));
+              }
+            }),
       ],
     );
   }
