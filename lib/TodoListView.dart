@@ -19,40 +19,14 @@ class TodoListView extends StatelessWidget {
           style: TextStyle(color: Colors.black),
         ),
         centerTitle: true,
-        actions: [
-          PopupMenuButton(
-              onSelected: (value) {
-                Provider.of<MyState>(context, listen: false).setFilterBy(value);
-              },
-              itemBuilder: (context) => [
-                    PopupMenuItem(child: Text('all'), value: 'all'),
-                    PopupMenuItem(child: Text('done'), value: 'done'),
-                    PopupMenuItem(child: Text('undone'), value: 'undone'),
-                  ]),
-        ],
+        actions: [_popupMenuButton(context)],
       ),
       body: Consumer<MyState>(
         builder: (context, state, child) => state.loading
             ? _loadingIndicator()
             : TodoList(_filterList(state.list, state.filterBy)),
       ),
-      floatingActionButton: FloatingActionButton(
-        child: Icon(
-          Icons.add,
-          color: Colors.black,
-        ),
-        backgroundColor: Colors.blueGrey,
-        onPressed: () async {
-          var newTodo = await Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) =>
-                      AddTodoView(TodoItem(message: 'message'))));
-          if (newTodo != null) {
-            Provider.of<MyState>(context, listen: false).addTodo(newTodo);
-          }
-        },
-      ),
+      floatingActionButton: _floatingActionButton(context),
     );
   }
 }
@@ -65,6 +39,40 @@ List<TodoItem> _filterList(list, choice) {
   }
 
   return list;
+}
+
+Widget _popupMenuButton(context) {
+  return PopupMenuButton(
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(20))),
+      color: Colors.blueGrey[100],
+      onSelected: (value) {
+        Provider.of<MyState>(context, listen: false).setFilterBy(value);
+      },
+      itemBuilder: (context) => [
+            PopupMenuItem(child: Text('All'), value: 'all'),
+            PopupMenuItem(child: Text('Done'), value: 'done'),
+            PopupMenuItem(child: Text('Undone'), value: 'undone'),
+          ]);
+}
+
+Widget _floatingActionButton(context) {
+  return FloatingActionButton(
+    child: Icon(
+      Icons.add,
+      color: Colors.black,
+    ),
+    backgroundColor: Colors.blueGrey,
+    onPressed: () async {
+      var newTodo = await Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => AddTodoView(TodoItem(message: 'message'))));
+      if (newTodo != null) {
+        Provider.of<MyState>(context, listen: false).addTodo(newTodo);
+      }
+    },
+  );
 }
 
 Widget _loadingIndicator() {

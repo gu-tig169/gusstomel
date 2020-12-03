@@ -16,6 +16,8 @@ class TodoList extends StatelessWidget {
 
   Widget _todoItem(context, todo) {
     return Card(
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(15))),
         color: Colors.blueGrey[200],
         child: Container(
           child: ListTile(
