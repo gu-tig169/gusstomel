@@ -28,13 +28,18 @@ class TodoItem {
 class MyState extends ChangeNotifier {
   List<TodoItem> _list = [];
   String _filterBy = 'all';
+  bool _loading = false;
 
   List<TodoItem> get list => _list;
 
   String get filterBy => _filterBy;
+  bool get loading => _loading;
 
   Future getList() async {
+    _loading = true;
+    notifyListeners();
     List<TodoItem> list = await Api.getTodos();
+    _loading = false;
     _list = list;
     notifyListeners();
   }

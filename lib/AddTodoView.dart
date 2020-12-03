@@ -30,6 +30,7 @@ class AddTodoViewState extends State<AddTodoView> {
   }
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.blueGrey[100],
       key: _scaffoldKey,
       appBar: AppBar(
         iconTheme: IconThemeData(color: Colors.black),
@@ -55,6 +56,7 @@ class AddTodoViewState extends State<AddTodoView> {
 //Textinmatningsfält
   Widget _inputField() {
     return Container(
+        color: Colors.white,
         margin: EdgeInsets.only(left: 20, right: 20, top: 20),
         child: Theme(
           data: ThemeData(
@@ -82,7 +84,10 @@ class AddTodoViewState extends State<AddTodoView> {
             textColor: Colors.black,
             onPressed: () {
               if (textEditingController.text.trim().isEmpty) {
-                SnackBar snackBar = SnackBar(content: Text("Write a todo!"));
+                SnackBar snackBar = SnackBar(
+                    backgroundColor: Colors.blueGrey,
+                    content:
+                        Text("Write a todo!", style: TextStyle(fontSize: 16)));
                 _scaffoldKey.currentState.showSnackBar(snackBar);
                 print('pressed');
               } else {

@@ -16,37 +16,37 @@ class TodoList extends StatelessWidget {
 
   Widget _todoItem(context, todo) {
     return Card(
+        color: Colors.blueGrey[200],
         child: Container(
-      child: ListTile(
-        leading: Checkbox(
-            checkColor: Colors.black,
-            activeColor: Colors.blueGrey,
-            focusColor: Colors.black,
-            value: todo.check,
-            onChanged: (bool newValue) {
-              var state = Provider.of<MyState>(context, listen: false);
-              state.setCheck(todo, newValue);
-            }),
-        title: Text(todo.message != null ? todo.message : '',
-            style: todo.check
-                ? (TextStyle(
-                    color: Colors.black.withOpacity(0.3),
-                    decoration: TextDecoration.lineThrough,
-                    fontStyle: FontStyle.italic,
-                    fontSize: 20,
-                  ))
-                : TextStyle(
-                    fontSize: 20,
-                  )),
-        trailing: IconButton(
-          color: Colors.black,
-          icon: Icon(Icons.close),
-          onPressed: () {
-            var state = Provider.of<MyState>(context, listen: false);
-            state.removeTodo(todo);
-          },
-        ),
-      ),
-    ));
+          child: ListTile(
+            leading: Checkbox(
+                checkColor: Colors.black,
+                activeColor: Colors.blueGrey,
+                value: todo.check,
+                onChanged: (bool newValue) {
+                  var state = Provider.of<MyState>(context, listen: false);
+                  state.setCheck(todo, newValue);
+                }),
+            title: Text(todo.message != null ? todo.message : '',
+                style: todo.check
+                    ? (TextStyle(
+                        color: Colors.black.withOpacity(0.3),
+                        decoration: TextDecoration.lineThrough,
+                        fontStyle: FontStyle.italic,
+                        fontSize: 20,
+                      ))
+                    : TextStyle(
+                        fontSize: 20,
+                      )),
+            trailing: IconButton(
+              color: Colors.black,
+              icon: Icon(Icons.close),
+              onPressed: () {
+                var state = Provider.of<MyState>(context, listen: false);
+                state.removeTodo(todo);
+              },
+            ),
+          ),
+        ));
   }
 }

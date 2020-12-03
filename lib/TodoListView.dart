@@ -10,6 +10,7 @@ class TodoListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.blueGrey[100],
       appBar: AppBar(
         iconTheme: IconThemeData(color: Colors.black),
         backgroundColor: Colors.blueGrey,
@@ -31,8 +32,9 @@ class TodoListView extends StatelessWidget {
         ],
       ),
       body: Consumer<MyState>(
-        builder: (context, state, child) =>
-            TodoList(_filterList(state.list, state.filterBy)),
+        builder: (context, state, child) => state.loading
+            ? _loadingIndicator()
+            : TodoList(_filterList(state.list, state.filterBy)),
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(
@@ -53,14 +55,28 @@ class TodoListView extends StatelessWidget {
       ),
     );
   }
+}
 
-  List<TodoItem> _filterList(list, choice) {
-    if (choice == "done") {
-      return list.where((todo) => todo.check == true).toList();
-    } else if (choice == "undone") {
-      return list.where((todo) => todo.check == false).toList();
-    }
-
-    return list;
+List<TodoItem> _filterList(list, choice) {
+  if (choice == "done") {
+    return list.where((todo) => todo.check == true).toList();
+  } else if (choice == "undone") {
+    return list.where((todo) => todo.check == false).toList();
   }
+
+  return list;
+}
+
+Widget _loadingIndicator() {
+  return Center(
+    child: SizedBox(
+      height: 60,
+      width: 60,
+      child: CircularProgressIndicator(
+        strokeWidth: 10,
+        backgroundColor: Colors.grey,
+        valueColor: new AlwaysStoppedAnimation<Color>(Colors.blueGrey),
+      ),
+    ),
+  );
 }
