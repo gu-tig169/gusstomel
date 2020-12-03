@@ -6,6 +6,7 @@ import 'TodoListView.dart';
 
 void main() {
   var state = MyState();
+  state.getList();
 
   runApp(
     ChangeNotifierProvider(
@@ -19,6 +20,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: TodoListView(),
     );
   }
